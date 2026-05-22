@@ -1,8 +1,28 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Media.css"
+import { fetchTrendingGiphys } from '../api/giphyApi';
 
 const Media = () => {
+    const [trending, setTrending] = useState ([]);
+
+    const randomizeData = (content) => {
+        return content.data.sort(() => Math.random() - 0.5)
+
+    }
+
+    const getTrendingGiphys = async () => {
+        //get the giphys by doing an API call
+        const trending = await fetchTrendingGiphys
+        //set the trending giphys
+        setTrending(randomizeData(trending.data))
+    }            
+
+    useEffect(() => {
+        getTrendingGiphys();
+    }, []);
+
+
   return (
     <div className='media'>
 
@@ -12,7 +32,9 @@ const Media = () => {
                 <h1>Trending</h1>
             </div>
             <div className='trending-container'>
-                <p>Content</p>
+                {trending?.map((trendingGiphy, index) => {
+                    return <TrendingGiphy giphy={trendingGiphy} key={index}/>
+                })}
             </div>
         </div> 
         <div className='row'>
