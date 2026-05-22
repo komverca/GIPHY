@@ -1,5 +1,6 @@
 import './App.css';
 import Header from "./components/Header"
+import Media from './components/Media';
 import SearchContainer from './components/SearchContainer';
 
 
@@ -9,7 +10,7 @@ function App() {
       <div className='main'>
         <Header />
         <SearchContainer />
-        <h1>Media</h1>
+        <Media />
       </div>
     </div>
   );
